@@ -1,2 +1,8 @@
-EMAIL_USERNAME=
-EMAIL_PASSWORD=
+spring.thymeleaf.enabled=
+
+resend.api_key=
+
+envio.email.remetente=
+envio.email.nomeRemetente=
+
+server.port=
