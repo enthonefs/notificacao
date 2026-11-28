@@ -1,7 +1,6 @@
 package com.javanauta.notificacao.business;
 
 import com.javanauta.notificacao.business.dto.TarefasDTO;
-import com.javanauta.notificacao.infrastructure.exceptions.EmailException;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
@@ -10,10 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
-
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +23,7 @@ public class EmailService {
     @Value("${envio.email.nomeRemetente}")
     private String nomeRemetente;
     
-    public void enviaEmail(TarefasDTO dto){
+    public void enviaEmail(TarefasDTO dto) throws ResendException {
 
         try{
             Context context = new Context();
@@ -48,7 +43,7 @@ public class EmailService {
             resend.emails().send(mensagem);
 
         } catch (ResendException e) {
-            throw new EmailException("Erro ao enviar o email ", e);
+            throw new ResendException("Erro ao enviar email", e.getCause());
         }
     }
 }
