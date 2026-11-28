@@ -34,7 +34,7 @@ public class EmailService {
             String template = templateEngine.process("notificacao", context);
 
             CreateEmailOptions mensagem = CreateEmailOptions.builder()
-                    .from(nomeRemetente + " <" + ">")
+                    .from(nomeRemetente + " <" + remetente + ">")
                     .to(dto.getEmailUsuario())
                     .subject("Notificação de Tarefa")
                     .html(template)
